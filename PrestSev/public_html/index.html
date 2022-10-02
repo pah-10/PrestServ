@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+    <head>
+        <title>PrestServ</title>
+        <meta charset="UTF-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <link href="img/tccIcon.ico" rel="shortcut icon"/>
+        <link href="css/style.css" rel="stylesheet" type="text/css"/>
+        <script src="https://www.gstatic.com/firebasejs/7.9.0/firebase-app.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/7.9.0/firebase-auth.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/7.9.0/firebase-firestore.js"></script>
+        <script src="js/jsPopupBox.js"></script>
+        <script src="js/app.js"></script>
+    </head>
+    <body>
+        <!-- LOGIN -->
+        <div id="login" class="login">
+            <img src = "img/Tcc.png" title= "Tcc" alt= "ERROR BB" width= "300" height= "300">
+            <form onsubmit="app.authUsuario(event)">
+                <input id="tEmail" type="text" placeholder="E-mail" class="email"/><br/><br/>
+                <input id="tSenha" type="password" placeholder="Senha" class="senha"/><br/><br/>
+                <button type="submit" class="btnLogin">Login</button>
+            </form>
+            <br/><br/>
+            Problemas de login?
+            <button onclick="app.showEsqueciSenha()" class="esqueciS">Esqueceu sua senha?</button><br/><br/>
+            Ainda não faz parte do nosso time?
+            <button onclick="app.showNovoUsuario()" class="cadastrar">Cadastre-se</button><br/>
+        </div>
+        
+        <!-- ESQUECEU SENHA -->
+        <div id="esqueciSenha" class="senhaEsque">
+            <br/>
+            <button class="voltar" onclick="app.showLogin()">Voltar</button><br/><br/>
+            <form onsubmit="app.esqueciSenha(event)">
+                <h1>Recuperação de conta</h1>
+                <p>
+                    Precisamos enviar um email de recuperaçao para você, para isso, digite o email cadastrado no app: <br/>
+                    Por favor verefique em todas as caixas de email (incluindo a de spam)!
+                </p><br/>
+                <input id="tEmailEsqueci" type="text"  placeholder="E-mail" class="email"/><br/><br/>
+                <button type="submit" class="btnEnvio">Enviar</button>
+            </form>
+            <br/><br/>
+            <img class="recupera" src="img/recuperar.png"/>
+        </div>
+        
+        <!-- CADASTRO -->
+        <div id="novoUsuario" class="novoUser">
+            <br/>
+            <button class="voltar" onclick="app.showLogin()">Voltar</button><br/><br>
+            <form onsubmit="app.addUsuario(event)">
+                <h1>Welcome!!</h1>
+                <p>
+                    Agradecemos muito por você querer fazer parte do nosso time &#9829;<br/><br>
+                    O processo de entrada é muito simples, basta apenas seguir a ordem a abaixo:
+                    <br/><br/>
+                </p>
+                1° Passo: &nbsp; 
+                <input id="tEmailNovo" type="text" placeholder="Digite seu email" class="email"/><br/><br/>
+                2° Passo: &nbsp;
+                <input id="tSenha1Novo" type="password" placeholder="Digite sua senha" class="senha"/><br/><br/>
+                3° Passo: &nbsp;
+                <input id="tSenha2Novo" type="password" placeholder="Digite a senha novamente" class="senha"/><br/><br/><br>
+                <button type="submit" class="btnCadastro">Cadastrar</button><br/><br/><br/>
+            </form>
+            Ao se cadastrar, você estará totalmente de acordo e consciente dos nossos <button class="termos" onclick="app.termos()">Termos De Uso</button>
+        </div>
+        
+        <!-- TELA PRINCIPAL -->
+        <div id="principal">
+            <br/><br/>
+            <button class="btn1" onclick="app.logoffUsuario()" >Logoff</button>
+            <button class="btn1" onclick="app.showAddServico()">Adicionar Serviço</button>
+            <button class="btn1" onclick="app.showCreditos()">Sobre Nós</button><br/>
+            <br/><br/>
+            <button class="btn" onclick="app.listServico('Advocacia')"><img src="img/advocacia.png"/></button>
+            <button class="btn" onclick="app.listServico('Agronegócio')"><img src="img/agro.png"/></button>
+            <button class="btn" onclick="app.listServico('Construção')"><img src="img/contrucao.png"/></button>
+            <button class="btn" onclick="app.listServico('Contabilidade')"><img src="img/contabilidade.png"/></button>
+            <button class="btn" onclick="app.listServico('Culinária')"><img src="img/culinaria.png"/></button><br/>
+            <button class="btn" onclick="app.listServico('Educação')"><img src="img/educacao.png"/></button>
+            <button class="btn" onclick="app.listServico('Entretenimento')"><img src="img/entreterimento.png"/></button>
+            <button class="btn" onclick="app.listServico('Imóveis')"><img src="img/imovel.png"/></button>
+            <button class="btn" onclick="app.listServico('Pet')"><img src="img/pet.png"/></button><br/>
+            <button class="btn" onclick="app.listServico('Saúde')"><img src="img/saude.png"/></button>
+            <button class="btn" onclick="app.listServico('Segurança')"><img src="img/seguranca.png"/></button>
+            <button class="btn" onclick="app.listServico('Informática')"><img src="img/tecnologia.png"/></button>
+            <button class="btn" onclick="app.listServico('Transporte')"><img src="img/trasporte.png"/></button>
+            <button class="btn"><img src="img/mais.png"/></button>
+        </div>
+        
+        <!-- Lista de Serviços -->
+        <div id="servicoList"></div>
+        
+        <!-- ADD SERVIÇOS -->
+        <div id="servicoForm" class="addServ">
+            <br/>
+            <button class="voltar" onclick="app.showPrincipal()">Voltar</button><br/>
+            <form onsubmit="app.addServico(event)">
+                <h1>Cadastro de Serviço</h1>
+                Insira o nome do Serviço:<br/>
+                <input id="tNome" type="text" required /><br/><br>
+                Selecione uma categoria:
+                <select id="cCategoria">
+                    <option>Advocacia</option>
+                    <option>Agronegócio</option>
+                    <option>Construção</option>
+                    <option>Contabilidade</option>
+                    <option>Culinária</option>
+                    <option>Educação</option>
+                    <option>Entretenimento</option>
+                    <option>Imóveis</option>
+                    <option>Pet</option>
+                    <option>Saúde</option>
+                    <option>Segurança</option>
+                    <option>Tecnologia</option>
+                    <option>Transporte</option>
+                </select><br><br>
+                Faça uma breve descrição do seu produto (opcional)<br/>
+                <textarea id="tDescricao"></textarea><br/>
+                Contato(s):<br/>
+                <textarea id="tContato" required ></textarea><br/><br/>
+                <button type="submit" class="btnCadastro">Cadastrar</button>
+            </form>
+        </div>
+        
+        <!-- CREDITOS -->
+        <div id="creditos">
+            <br>
+            <button class="voltar" onclick="app.showPrincipal()">Voltar</button><br/>
+            <p>
+                <h1>Hello!!</h1>
+                O PrestSev foi desenvolvido como parte das exigências para obtenção do título de Técnico em Informática do Colégio Técnico Agrícola da UNESP de Jaboticabal/SP. <br><br> A aplicação foi desenvolvida por um grupo de amigos que se conheceram durante o curso e decidiram, desde o início, realizar o TCC juntos. <br/><br> Todos eles passaram por muitos altos e baixos, mas, no fim, conseguiram concluir a tarefa que os foi dada. Resultando nessa plataforma comercial que auxilia no processo de compra e venda. <br><br> <b>O grupo é composto por 5 doidos:</b><br/> Antony Santos <br> Paola Paulina De Jesus Santa Capita <br/> Renan Nascimento Da Silva <br> Vinicius Augusto De Oliveira <br/>Vinicius B.<br><br>
+                <b>Orientador:</b> Prof. MSc. Marcos J. K. Morise<br/>
+                <b>Co-orientadora:</b> Profa. Dra. Andreia Cristina Teodoro F. Silva.
+                <br><br>
+                Agradecemos a todos os professores e colegas por nos proporcionarem todo o aprendizado e momentos incríveis &#9829;
+            </p> 
+        </div>
+    </body>
+</html>

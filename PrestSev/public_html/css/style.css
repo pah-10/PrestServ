@@ -1,0 +1,176 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@300&display=swap");
+
+*{
+    font-family: Montserrat, sans-serif; 
+    font-size: 15px;
+    color: black;
+}
+
+html {
+    background: url('../img/oi.webp') no-repeat center center fixed;
+    -webkit-background-size:cover;
+    -moz-background-size:cover;
+    -o-background-size:cover;
+    background-size:cover;
+    color:black;
+}
+
+body{
+    height: 100%;
+    margin: 10px;
+    padding: 0px;
+    border: 0px;
+}
+
+h1{
+    text-align: center;
+    font-size: 25px;
+    color: darkblue;
+}
+
+h2{
+    text-align: center;
+    color: darkslategrey;
+}
+
+p{
+    text-align: justify;
+    margin: 3%;
+}
+
+.login, .novoUser, .senhaEsque, .addServ, #creditos{
+    background: rgba(255,255,255,8);
+    width: 490px; 
+    height: 560px;
+    text-align: center;
+    margin:auto;
+    border-radius: 20px;
+    margin-top: 3%;
+}
+
+.btnLogin, .btnCadastro, .btnEnvio{
+    width: 300px; 
+    height: 30px;
+    border-radius: 30px;
+    color: white;
+    background-color: mediumpurple;
+    transition: .5s;
+}
+
+.voltar{
+    width: 90px; 
+    height: 25px;
+    color: white;
+    transition: .5s;
+    margin-right: 75%;
+    background-color: darkblue;
+    border-radius: 10px;
+}
+
+.voltar:hover{
+    background-color: mediumpurple;
+    border-color: purple;
+    box-shadow: 0 0 2px 0 purple;
+    color: white; 
+}
+
+.btnLogin:hover, .btnEnvio:hover, .btnCadastro:hover{
+    background-color: aquamarine;
+    border-color:aqua;
+    box-shadow: 0 0 2px 0 aqua;
+    color:black;
+}
+
+.btn{
+    width: 130px; 
+    height: 120px;
+    border-radius: 25px;
+    margin-top: 15px;
+    border-style: solid;
+    border-color: black;
+}
+
+.btn:hover{
+    background-color: mediumslateblue;
+}
+
+.btn1{
+    width: 150px; 
+    height: 40px;
+    background-color: mediumslateblue;
+    font-size: 15px;
+    border-color: black;
+    color: white;
+    border-radius: 10px;
+}
+
+.btn1:hover{
+    background-color: transparent;
+    color: mediumslateblue;
+}
+
+.email, .senha, #tNome{
+    width: 290px; 
+    height: 25px;
+    border:2px solid #aaa;
+    border-radius: 4px;
+    outline: none;
+    transition: .3s;
+}
+
+select, #tDescricao, #tContato{
+    border:2px solid #aaa;
+    border-radius: 4px;
+}
+
+#servicoList, #principal{
+    background: rgba(255,255,255,8);
+    width: 800px; 
+    height: 560px;
+    text-align: center;
+    margin: auto;
+    border-radius: 20px;
+    margin-top: 3%;
+}
+
+.email:focus, .senha:focus, #tNome:focus, #tDescricao:focus, #tContato:focus{
+    border-color: aqua;
+    box-shadow: 0 0 10px 0 aqua;
+}
+
+.cadastrar, .esqueciS, .termos{
+    background-color: transparent;
+    text-decoration: underline mediumpurple;
+    color:mediumpurple;
+    border: none;
+}
+
+.cadastrar:hover, .esqueciS:hover, .termos:hover{
+    background-color: transparent;
+    font-weight:bolder;
+    font-size: 110%;
+    text-decoration: underline aqua;
+    color:aqua;
+}
+
+.abrir{
+    width: 100%;
+    background-color: mediumpurple;
+    color: white;
+    transition: 1s;
+}
+
+.abrir:hover{
+    background-color: mediumspringgreen;
+    color: black;
+}
+
+#tDescricao, #tContato{
+    width: 391px;
+    height: 100px;
+}
+
+table{
+    margin: 5%;
+    width: 90%;
+}
